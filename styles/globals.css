@@ -50,7 +50,12 @@ div {
   padding: 20px;
 }
 
-p {
+span {
   color: red;
-  margin-top: 0px;
+}
+
+label {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
 }

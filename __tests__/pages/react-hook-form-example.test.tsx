@@ -13,6 +13,7 @@ describe("ReactHookFormExample", () => {
     expect(screen.getByTestId("company")).toBeInTheDocument();
     expect(screen.getByTestId("email")).toBeInTheDocument();
     expect(screen.getByTestId("password")).toBeInTheDocument();
+    expect(screen.getByTestId("date")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Save/i })).toBeInTheDocument();
   });
 
@@ -23,7 +24,7 @@ describe("ReactHookFormExample", () => {
     const saveButton = screen.getByTestId("save");
     fireEvent.click(saveButton);
 
-    expect(await screen.findAllByRole("alert")).toHaveLength(5);
+    expect(await screen.findAllByRole("alert")).toHaveLength(6);
     expect(mockSave).not.toBeCalled();
   });
 });
