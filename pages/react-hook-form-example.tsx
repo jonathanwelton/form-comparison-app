@@ -18,7 +18,7 @@ export default function ReactHookFormExample({ saveData }) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <label>First name</label>
       <input
         type="text"
@@ -84,7 +84,7 @@ export default function ReactHookFormExample({ saveData }) {
         aria-invalid={errors.date ? "true" : "false"}
         data-testid="date"
         {...register('date', {
-          required: { value: true, message: "Please enter a date" },
+          required: { value: true, message: "Please enter a valid date" },
         })}
       />
       {errors.date && <span role="alert">{errors.date.message}</span>}
