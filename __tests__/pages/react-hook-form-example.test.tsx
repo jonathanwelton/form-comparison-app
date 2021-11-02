@@ -24,7 +24,7 @@ describe("ReactHookFormExample", () => {
     const saveButton = screen.getByTestId("save");
     fireEvent.click(saveButton);
 
-    expect(await screen.findAllByRole("alert")).toHaveLength(6);
+    expect(await screen.findAllByRole("alert")).toHaveLength(8);
     expect(mockSave).not.toBeCalled();
   });
 });
