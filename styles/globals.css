@@ -29,6 +29,10 @@ input, select {
   box-sizing: border-box;
 }
 
+[aria-invalid="true"] {
+  border-color: red;
+}
+
 input[type=submit] {
   width: 100%;
   background-color: #4CAF50;

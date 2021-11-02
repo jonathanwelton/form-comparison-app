@@ -18,6 +18,7 @@ export default function Home() {
         </h1>
 
         <Link href="/react-hook-form-example">React Hook Form Example</Link>
+        <Link href="/im-my-own-form">Bespoke form</Link>
       </main>
 
       <footer className={styles.footer}>
