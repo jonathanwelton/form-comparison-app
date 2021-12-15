@@ -18,6 +18,7 @@ export default function Home() {
         </h1>
 
         <Link href="/react-hook-form-example">React Hook Form Example</Link>
+        <Link href="/final-form-example">Final Form Example</Link>
         <Link href="/custom-react-hook-form-example">Custom React Hook Form Example</Link>
       </main>
 
