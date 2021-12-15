@@ -54,6 +54,12 @@ const useMyOwnForm = ({
         
             const element = document.getElementById(name) as HTMLInputElement
 
+            if (!element) {
+                console.log(formElement)
+
+                return
+            }
+
             const { value } = element
 
             const setAriaInvalid = (invalid: boolean) => element.setAttribute('aria-invalid', invalid ? 'true' : 'false')
@@ -214,11 +220,11 @@ const ImMyOwnForm = () => {
             <label htmlFor="favouriteThing">Favourite thing:</label>
             <input {...register({name: "favouriteThing"})} type="text" />
 
-            <label htmlFor="option1">Option 1</label>
+            {/* <label htmlFor="option1">Option 1</label>
             <input {...register({name: "radios", id: 'option1', value: 'Option 1', required: { value: true, message: 'Radio radio'}})} type="radio" />
             <label htmlFor="option2">Option 2</label>
             <input {...register({name: "radios", id: 'option2', value: 'Option 2', required: { value: true, message: 'Radio radio'}})} type="radio" />
-            {errors?.radios && <span role="alert">{errors.radios}</span>}
+            {errors?.radios && <span role="alert">{errors.radios}</span>} */}
             <input title="submit" type="submit" />
         </form>
     )
