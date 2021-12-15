@@ -1,4 +1,9 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "../hooks/useForm";
+
+import RadioButton from "../components/RadioButton"
+import RadioGroup from "../components/RadioGroup"
+import Select from "../components/Select"
+import TextInput from "../components/TextInput"
 
 type Inputs = {
   firstName: string,
@@ -11,85 +16,65 @@ type Inputs = {
 };
 
 export default function ReactHookFormExample({ saveData }) {
-  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({ mode: 'onBlur' });
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit: SubmitHandler<Inputs> = data => {
     console.log(data)
     if (typeof saveData !== 'undefined') { saveData(data) }
   }
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)}>
-      <label>First name</label>
-      <input
-        type="text"
-        aria-invalid={errors.firstName ? "true" : "false"}
-        data-testid="firstName"
-        {...register("firstName", {
+    <main>
+      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <TextInput data-testid="firstName" errorMessage={errors?.firstName?.message} label="First name" {...register("firstName", {
           required: { value: true, message: "Please enter you first name" }
-        })}
-      />
-      {errors.lastName && <span role="alert">{errors.lastName.message}</span>}
-
-      <label>Last name</label>
-      <input
-        type="text"
-        aria-invalid={errors.lastName ? "true" : "false"}
-        data-testid="lastName"
-        {...register("lastName", {
+        })} />
+        
+        <TextInput data-testid="lastName" errorMessage={errors?.lastName?.message} label="Last name" {...register("lastName", {
           required: { value: true, message: "Please enter you last name" }
-        })}
-      />
-      {errors.firstName && <span role="alert">{errors.firstName.message}</span>}
-
-      <label>Company</label>
-      <input
-        type="text"
-        aria-invalid={errors.company ? "true" : "false"}
-        data-testid="company"
-        {...register("company", {
+        })} />
+        
+        <TextInput data-testid="company" errorMessage={errors?.company?.message} label="Company" {...register("company", {
           required: { value: true, message: "Please enter you company" }
-        })}
-      />
-      {errors.company && <span role="alert">{errors.company.message}</span>}
-
-      <label>Email</label>
-      <input
-        type="email"
-        aria-invalid={errors.email ? "true" : "false"}
-        data-testid="email"
-        {...register("email", {
+        })} />
+        
+        <TextInput data-testid="email" errorMessage={errors?.email?.message} label="Email" type="email" {...register("email", {
           required: { value: true, message: "Please enter your email" },
           pattern: { value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i, message: "Please enter a valid email" }
-        })}
-      />
-      {errors.email && <span role="alert">{errors.email.message}</span>}
-
-      <label>Choose password</label>
-      <input
-        type="password"
-        aria-invalid={errors.password ? "true" : "false"}
-        data-testid="password"
-        {...register("password", {
+        })} />
+        
+        <TextInput data-testid="password" errorMessage={errors?.password?.message} label="Password" type="password" {...register("password", {
           required: { value: true, message: "Please enter a password" },
-          minLength:  { value: 8, message: "Please enter a password at least 8 characters long" },
-          maxLength:  { value: 100, message: "Please enter a password no more than 100 characters long" },
           pattern: { value: /^(?=.{8,100}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9]).*$/ , message: "Please enter a valid password containing at least one number with a mixture of uppercase and lowercase letters" }
-        })}
-      />
-      {errors.password && <span role="alert">{errors.password.message}</span>}
-
-      <label>Date</label>
-      <input
-        type="date"
-        aria-invalid={errors.date ? "true" : "false"}
-        data-testid="date"
-        {...register('date', {
+        })} />
+        
+        <TextInput data-testid="date" errorMessage={errors?.date?.message} label="Date" type="date" {...register("date", {
           required: { value: true, message: "Please enter a valid date" },
-        })}
-      />
-      {errors.date && <span role="alert">{errors.date.message}</span>}
+        })} />
 
-      <input type="submit" data-testid="save" value="Save" />
-    </form>
+        <RadioGroup errorMessage={errors?.desertIslandDisc?.message} name="desertIslandDisc" title="What's your desert island disc?">
+          <RadioButton data-testid="floppyDisc" label="Floppy disc" value="floppy disc"
+            {...register("desertIslandDisc", {
+              required: { value: true, message: "Please radio in" }
+            })}
+          />
+          <RadioButton data-testid="discus" label="Discus" value="discus"
+            {...register("desertIslandDisc", {
+              required: { value: true, message: "Please radio in" }
+            })}
+          />
+          <RadioButton data-testid="slippedDisc" label="Slipped disc" value="slippedDisc"
+            {...register("desertIslandDisc", {
+              required: { value: true, message: "Please radio in" }
+            })}
+          />
+        </RadioGroup>
+
+        <Select data-testid="favouriteThing" errorMessage={errors?.favouriteThing?.message} label="Favourite thing" options={[{label: "Dogs", value: "dogs"}, {label: "Computers", value: "computers"}, {label: "Form comparison applications", value: "form comparison applications"}]} {...register("favouriteThing", {
+          required: { value: true, message: "Please pick a favourite thing from the options" }
+        })} />
+
+        <input type="submit" data-testid="save" value="Save" />
+      </form>
+    </main>
   );
 }

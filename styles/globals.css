@@ -19,7 +19,7 @@ h1 {
   box-sizing: border-box;
 }
 
-input, select {
+input:not([type="radio"]), select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -27,6 +27,13 @@ input, select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+input:focus[aria-invalid="true"],
+select:focus[aria-invalid="true"] {
+  border-color: #E03129;
 }
 
 input[type=submit] {
@@ -58,4 +65,8 @@ label {
   display: flex;
   flex-direction: row;
   margin-top: 10px;
+}
+
+[role="radiogroup"][aria-invalid="true"] {
+  border: 2px solid red;
 }
